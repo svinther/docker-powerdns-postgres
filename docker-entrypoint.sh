@@ -24,7 +24,7 @@ masterip=$2
 : ${domain:?"ARGS:=<domainname> <masterip>"}
 : ${masterip:?"ARGS:=<domainname> <masterip>"}
 
-$SQLITE <<< "INSERT INTO domains (name, master, type) VALUES ('$domain', '$masterip', 'SLAVE');" 
+sqlite3 /var/lib/sqlite/sqlite.db <<< "INSERT INTO domains (name, master, type) VALUES ('$domain', '$masterip', 'SLAVE');" 
 EOF
 chmod +x /usr/local/bin/addslave
 }
@@ -49,7 +49,7 @@ masterip=$2
 : ${domain:?"ARGS:=<domainname> <masterip>"}
 : ${masterip:?"ARGS:=<domainname> <masterip>"}
 
-$PSQL <<< "INSERT INTO domains (name, master, type) VALUES ('$domain', '$masterip', 'SLAVE');" 
+psql -h linkedpg <<< "INSERT INTO domains (name, master, type) VALUES ('$domain', '$masterip', 'SLAVE');" 
 EOF
 chmod +x /usr/local/bin/addslave
 }
