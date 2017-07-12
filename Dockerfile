@@ -6,12 +6,12 @@ ENV PGUSER=postgres \
     PGDATABASE=pdns
 
 RUN yum -y install epel-release && \
-    yum -y install pdns-backend-postgresql postgresql && \
+    yum -y install pdns-backend-postgresql postgresql pdns-backend-sqlite && \
     yum clean all
 
 ADD docker-entrypoint.sh /
-ADD pgsql-schema.sql /etc/pdns
-ADD pdns.conf /etc/pdns/
+ADD pgsql-schema.sql /etc/pdns/
+ADD sqlite-schema.sql /etc/pdns/
 
 EXPOSE 53/tcp 53/udp
 
